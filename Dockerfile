@@ -36,8 +36,6 @@ COPY . /home/webrtc_ws/src/
 
 RUN git clone https://github.com/GT-RAIL/async_web_server_cpp.git /home/webrtc_ws/src/async_web_server_cpp/
 
-RUN /ros_entrypoint.sh catkin_make_isolated --install --install-space "/usr/local/webrtc/" \
-    && sed -i '$isource "/usr/local/webrtc/setup.bash"' /ros_entrypoint.sh \
-    && rm -rf /home/webrtc_ws/
+
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
