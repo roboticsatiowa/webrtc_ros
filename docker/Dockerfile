@@ -1,4 +1,4 @@
-FROM osrf/ros:melodic-desktop-full
+FROM ros:humble-ros-base-jammy
 
 LABEL description="A docker file to test the released version of webrtc ROS"
 
@@ -14,5 +14,3 @@ RUN chmod +x test-script.sh
 EXPOSE 8080
 
 RUN apt-get install -y ros-melodic-webrtc-ros
-
-CMD ./test-script.sh

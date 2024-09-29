@@ -1,21 +1,13 @@
-FROM ros:noetic-perception
+FROM ros:humble-perception
 
 
 # ROS dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        ros-noetic-cv-bridge \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        git\
-        curl
-
-
-RUN apt-get install -y --no-install-recommends python2 gmodule-2.0 libgtk-3-dev libglib2.0-dev pulseaudio libasound2-dev libpulse-dev ros-noetic-image-transport ninja-build stow
+    ros-humble-cv-bridge \
+    git \
+    curl \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get install -y --no-install-recommends libjpeg-turbo8 libjpeg-turbo8-dev
 
@@ -29,7 +21,7 @@ RUN git clone https://github.com/open-source-parsers/jsoncpp.git . && \
     make && \
     make install
 
-ENV LD_LIBRARY_PATH /usr/local/lib/:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/lib/
 
 WORKDIR /home/webrtc_ws
 COPY . /home/webrtc_ws/src/
