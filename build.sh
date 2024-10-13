@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Get the directory of the script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
-docker build -f $SCRIPT_DIR/Dockerfile -t webrtc_ros:latest $SCRIPT_DIR
+# Build the Docker image
+docker build -f "$SCRIPT_DIR/docker/Dockerfile" -t webrtc_ros:latest "$SCRIPT_DIR"
 
+# Testing webcam access
+docker run -it --rm \
+    --device=/dev/video0 \
+    --group-add video \
+    --privileged \
+    -v /dev/video0:/dev/video0 \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=$DISPLAY \
+    webrtc_ros:latest

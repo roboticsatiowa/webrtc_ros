@@ -29,6 +29,6 @@
     <param name="turn_server_creds_password" value=""/>
   </node>
   <node name="webrtc_server" pkg="webrtc_ros" type="webrtc_ros_server_node">
-    <param name="port" value="9090"/>
+    <param name="port" value="8080"/>
   </node>
 </launch>

@@ -3,14 +3,13 @@ FROM ros:humble-ros-base-jammy
 LABEL description="A docker file to test the released version of webrtc ROS"
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -y && apt-get upgrade -y && apt-get install -y apt-utils
 
-RUN apt-get install -y ros-melodic-video-stream-opencv wget
-RUN wget http://techslides.com/demos/sample-videos/small.mp4 -O /tmp/small.mp4
+# Copy test script into container
+COPY test-script.sh /test-script.sh
+RUN chmod +x /test-script.sh
 
-COPY test-script.sh test-script.sh
-RUN chmod +x test-script.sh
-
+# Expose port for video streaming
 EXPOSE 8080
 
-RUN apt-get install -y ros-melodic-webrtc-ros
+# Entry point
+CMD ["/test-script.sh"]
