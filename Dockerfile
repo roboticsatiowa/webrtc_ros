@@ -9,7 +9,6 @@ RUN apt-get update && \
     curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
     
-RUN apt-get install ffmpeg
 
 RUN apt-get install -y --no-install-recommends libjpeg-turbo8 libjpeg-turbo8-dev
 

@@ -9,9 +9,7 @@ docker build -f "$SCRIPT_DIR/docker/Dockerfile" -t webrtc_ros:latest "$SCRIPT_DI
 # Testing webcam access
 docker run -it --rm \
     --device=/dev/video0 \
-    --group-add video \
-    --privileged \
-    -v /dev/video0:/dev/video0 \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=$DISPLAY \
-    webrtc_ros:latest
+    --privileged \
+    webrtc_ros:latest   
